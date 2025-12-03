@@ -3,13 +3,12 @@ import { Button } from "@/components/ui/button";
 
 interface CourseCardProps {
   title: string;
-  rating: number;
-  category: string;
-  thumbnail?: string;
-  playlistUrl?: string;
+  rating?: number;
+  category?: string;
+  url?: string;
 }
 
-export function CourseCard({ title, rating, category, playlistUrl }: CourseCardProps) {
+export function CourseCard({ title, rating = 4.5, category, url }: CourseCardProps) {
   return (
     <div className="group bg-card rounded-xl border border-border shadow-soft hover:shadow-hover transition-all duration-300 overflow-hidden">
       {/* Thumbnail */}
@@ -40,12 +39,14 @@ export function CourseCard({ title, rating, category, playlistUrl }: CourseCardP
 
         {/* Actions */}
         <div className="flex gap-2">
-          <Button variant="default" size="sm" className="flex-1">
-            <Play className="w-4 h-4" />
-            View
+          <Button variant="default" size="sm" className="flex-1" asChild>
+            <a href={url || "#"} target="_blank" rel="noopener noreferrer">
+              <Play className="w-4 h-4" />
+              Watch Now
+            </a>
           </Button>
           <Button variant="outline" size="sm" asChild>
-            <a href={playlistUrl || "#"} target="_blank" rel="noopener noreferrer">
+            <a href={url || "#"} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="w-4 h-4" />
             </a>
           </Button>

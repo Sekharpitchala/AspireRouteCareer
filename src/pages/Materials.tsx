@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { FloatingSocialButtons } from "@/components/FloatingSocialButtons";
 import { MaterialCard } from "@/components/MaterialCard";
 import { Search } from "lucide-react";
 
 const materials = [
-  { title: "C Programming Notes", description: "Complete C language fundamentals, pointers, memory management, and file handling." },
-  { title: "C++ Complete Notes", description: "OOPs concepts, STL, templates, and advanced C++ programming techniques." },
-  { title: "Java Notes", description: "Core Java, OOPs, Collections, Exception Handling, Multithreading, and more." },
-  { title: "Python Notes", description: "Python basics to advanced - data structures, file handling, and libraries." },
-  { title: "SQL & PL/SQL Notes", description: "Database queries, joins, stored procedures, triggers, and optimization." },
-  { title: "Computer Networks Notes", description: "OSI model, TCP/IP, protocols, network security, and architecture." },
-  { title: "Operating Systems Notes", description: "Process management, memory, file systems, and scheduling algorithms." },
-  { title: "DBMS Notes", description: "Database design, normalization, transactions, and SQL fundamentals." },
-  { title: "Data Structures Notes", description: "Arrays, linked lists, trees, graphs, and algorithm complexity." },
-  { title: "HR Interview Questions", description: "Common HR questions with sample answers and tips for freshers." },
-  { title: "Technical Interview Guide", description: "Coding interview prep, system design basics, and problem-solving strategies." },
-  { title: "Resume Building Tips", description: "How to create an ATS-friendly resume that gets noticed by recruiters." },
+  { title: "Artificial Intelligence Notes", description: "Complete AI fundamentals, machine learning concepts, and neural networks.", downloadUrl: "https://drive.google.com/drive/folders/1QeHFRG6cU6PWnxgIg8N76KZ1CKBU8ejJ?usp=drive_link" },
+  { title: "Java Notes", description: "Core Java, OOPs, Collections, Exception Handling, Multithreading, and more.", downloadUrl: "https://drive.google.com/drive/folders/11P2q7hungW3EBGBbf587Y0Q8pYwatDFk?usp=drive_link" },
+  { title: "C Programming Notes", description: "Complete C language fundamentals, pointers, memory management, and file handling.", downloadUrl: "https://drive.google.com/drive/folders/17p7UJ-jQTzYDl9E9pygOAxOkhbZ2_G2G?usp=drive_link" },
+  { title: "C++ Complete Notes", description: "OOPs concepts, STL, templates, and advanced C++ programming techniques.", downloadUrl: "https://drive.google.com/drive/folders/1g4eEbhJSlRNnLvU60KvhdbJvlShXPeoy?usp=drive_link" },
+  { title: "Computer Architecture Notes", description: "CPU design, memory hierarchy, pipelining, and system architecture.", downloadUrl: "https://drive.google.com/drive/folders/17ieX5k44TlA_j5NHWdKesDhOcvM1kMdM?usp=drive_link" },
+  { title: "Computer Networks Notes", description: "OSI model, TCP/IP, protocols, network security, and architecture.", downloadUrl: "https://drive.google.com/drive/folders/1QeHFRG6cU6PWnxgIg8N76KZ1CKBU8ejJ?usp=drive_link" },
+  { title: "Python Notes", description: "Python basics to advanced - data structures, file handling, and libraries.", downloadUrl: "#" },
+  { title: "SQL & PL/SQL Notes", description: "Database queries, joins, stored procedures, triggers, and optimization.", downloadUrl: "#" },
+  { title: "Operating Systems Notes", description: "Process management, memory, file systems, and scheduling algorithms.", downloadUrl: "#" },
+  { title: "DBMS Notes", description: "Database design, normalization, transactions, and SQL fundamentals.", downloadUrl: "#" },
+  { title: "Data Structures Notes", description: "Arrays, linked lists, trees, graphs, and algorithm complexity.", downloadUrl: "#" },
+  { title: "HR Interview Questions", description: "Common HR questions with sample answers and tips for freshers.", downloadUrl: "#" },
+  { title: "Technical Interview Guide", description: "Coding interview prep, system design basics, and problem-solving strategies.", downloadUrl: "#" },
+  { title: "Resume Building Tips", description: "How to create an ATS-friendly resume that gets noticed by recruiters.", downloadUrl: "#" },
 ];
 
 export default function Materials() {
@@ -30,6 +33,7 @@ export default function Materials() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <FloatingSocialButtons />
       
       <main className="pt-24 pb-16">
         <div className="container mx-auto">
