@@ -39,16 +39,21 @@ export function CourseCard({ title, rating = 4.5, category, url }: CourseCardPro
 
         {/* Actions */}
         <div className="flex gap-2">
-          <Button variant="default" size="sm" className="flex-1" asChild>
-            <a href={url || "#"} target="_blank" rel="noopener noreferrer">
-              <Play className="w-4 h-4" />
-              Watch Now
-            </a>
+          <Button 
+            variant="default" 
+            size="sm" 
+            className="flex-1"
+            onClick={() => url && window.open(url, "_blank", "noopener,noreferrer")}
+          >
+            <Play className="w-4 h-4" />
+            Watch Now
           </Button>
-          <Button variant="outline" size="sm" asChild>
-            <a href={url || "#"} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="w-4 h-4" />
-            </a>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => url && window.open(url, "_blank", "noopener,noreferrer")}
+          >
+            <ExternalLink className="w-4 h-4" />
           </Button>
         </div>
       </div>
