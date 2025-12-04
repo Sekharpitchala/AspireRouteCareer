@@ -8,11 +8,6 @@ interface MaterialCardProps {
 }
 
 export function MaterialCard({ title, description, downloadUrl }: MaterialCardProps) {
-  const handleView = () => {
-    if (downloadUrl && downloadUrl !== "#") {
-      window.open(downloadUrl, "_blank", "noopener,noreferrer");
-    }
-  };
 
   return (
     <div className="group bg-card rounded-xl border border-border shadow-soft hover:shadow-glow hover:border-primary/50 transition-all duration-300 p-5">
@@ -39,16 +34,19 @@ export function MaterialCard({ title, description, downloadUrl }: MaterialCardPr
           variant="secondary" 
           size="sm" 
           className="flex-1"
-          onClick={handleView}
+          onClick={() => downloadUrl && downloadUrl !== "#" && window.open(downloadUrl, "_blank", "noopener,noreferrer")}
         >
           <Eye className="w-4 h-4" />
           View
         </Button>
-        <Button variant="default" size="sm" className="flex-1" asChild>
-          <a href={downloadUrl || "#"} target="_blank" rel="noopener noreferrer">
-            <Download className="w-4 h-4" />
-            Download
-          </a>
+        <Button 
+          variant="default" 
+          size="sm" 
+          className="flex-1"
+          onClick={() => downloadUrl && downloadUrl !== "#" && window.open(downloadUrl, "_blank", "noopener,noreferrer")}
+        >
+          <Download className="w-4 h-4" />
+          Download
         </Button>
       </div>
     </div>
