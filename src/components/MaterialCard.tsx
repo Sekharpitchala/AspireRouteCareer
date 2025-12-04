@@ -8,8 +8,14 @@ interface MaterialCardProps {
 }
 
 export function MaterialCard({ title, description, downloadUrl }: MaterialCardProps) {
+  const handleView = () => {
+    if (downloadUrl && downloadUrl !== "#") {
+      window.open(downloadUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
-    <div className="group bg-card rounded-xl border border-border shadow-soft hover:shadow-hover transition-all duration-300 p-5">
+    <div className="group bg-card rounded-xl border border-border shadow-soft hover:shadow-glow hover:border-primary/50 transition-all duration-300 p-5">
       <div className="flex items-start gap-4">
         {/* Icon */}
         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
@@ -29,12 +35,17 @@ export function MaterialCard({ title, description, downloadUrl }: MaterialCardPr
 
       {/* Actions */}
       <div className="flex gap-2 mt-4">
-        <Button variant="secondary" size="sm" className="flex-1">
+        <Button 
+          variant="secondary" 
+          size="sm" 
+          className="flex-1"
+          onClick={handleView}
+        >
           <Eye className="w-4 h-4" />
           View
         </Button>
         <Button variant="default" size="sm" className="flex-1" asChild>
-          <a href={downloadUrl || "#"} download>
+          <a href={downloadUrl || "#"} target="_blank" rel="noopener noreferrer">
             <Download className="w-4 h-4" />
             Download
           </a>

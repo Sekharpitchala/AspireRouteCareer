@@ -1,11 +1,13 @@
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingSocialButtons } from "@/components/FloatingSocialButtons";
 import { SectionHeader } from "@/components/SectionHeader";
 import { CourseCard } from "@/components/CourseCard";
+import { Search } from "lucide-react";
 
 const mainCourses = [
-  { title: "Core Java Complete Course", rating: 4.8, category: "Java", url: "https://youtube.com/playlist?list=PLz8gl4BEGkEGYXNZrIRHJUSoxS_FPBrDy&si=LMz0SXdnoGZH9_fZ" },
+  { title: "Core Java Complete Course", rating: 4.8, category: "Java", url: "https://youtube.com/playlist?list=PLz8gl4BEGkEGYXNZrIRHJUSoxS_FPBrDy" },
   { title: "Python Masterclass", rating: 4.7, category: "Python", url: "https://www.youtube.com/watch?v=eWRfhZUzrAc" },
   { title: "C Programming Fundamentals", rating: 4.6, category: "C", url: "https://www.youtube.com/watch?v=KJgsSFOSQv0" },
   { title: "C++ Complete Course", rating: 4.5, category: "C++", url: "https://www.youtube.com/watch?v=vLnPwxZdW4Y" },
@@ -16,6 +18,7 @@ const mainCourses = [
   { title: "SQL Complete Course", rating: 4.8, category: "SQL", url: "https://www.youtube.com/watch?v=HXV3zeQKqGY" },
   { title: "PL/SQL Oracle Tutorial", rating: 4.6, category: "PL/SQL", url: "https://www.youtube.com/playlist?list=PLWPirh4EWFpHkZQvNLVTHXZyqSeX5TR1h" },
   { title: "Artificial Intelligence", rating: 4.9, category: "AI", url: "https://www.youtube.com/watch?v=JMUxmLyrhSk" },
+  { title: "Java Full Course", rating: 4.8, category: "Java", url: "https://www.youtube.com/watch?v=eIrMbAQSU34" },
   { title: "Java OOPs Concepts", rating: 4.7, category: "OOPs", url: "https://www.youtube.com/watch?v=eIrMbAQSU34" },
 ];
 
@@ -42,6 +45,27 @@ const frameworkCourses = [
 ];
 
 export default function Playlists() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredMain = mainCourses.filter(c => 
+    c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const filteredCS = csCoreCourses.filter(c => 
+    c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const filteredDSA = dsaCourses.filter(c => 
+    c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const filteredFrameworks = frameworkCourses.filter(c => 
+    c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const hasResults = filteredMain.length > 0 || filteredCS.length > 0 || filteredDSA.length > 0 || filteredFrameworks.length > 0;
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -50,7 +74,7 @@ export default function Playlists() {
       <main className="pt-24 pb-16">
         <div className="container mx-auto">
           {/* Hero */}
-          <div className="text-center mb-16 animate-fade-up">
+          <div className="text-center mb-12 animate-fade-up">
             <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 animate-pulse-slow">
               Learning Paths
             </span>
@@ -63,69 +87,97 @@ export default function Playlists() {
             </p>
           </div>
 
-          {/* Main Courses */}
-          <section className="mb-16 scroll-mt-24" id="main-courses">
-            <SectionHeader
-              badge="Foundation"
-              title="Programming Languages"
-              description="Start here if you're new to programming. Build a strong foundation."
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {mainCourses.map((course, index) => (
-                <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 50}ms` }}>
-                  <CourseCard {...course} />
-                </div>
-              ))}
+          {/* Search */}
+          <div className="max-w-xl mx-auto mb-12 animate-fade-up" style={{ animationDelay: "100ms" }}>
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search courses (e.g., Java, Python, React...)"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-14 pl-12 pr-4 rounded-xl border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              />
             </div>
-          </section>
+          </div>
+
+          {!hasResults && (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">No courses found matching "{searchQuery}"</p>
+            </div>
+          )}
+
+          {/* Main Courses */}
+          {filteredMain.length > 0 && (
+            <section className="mb-16 scroll-mt-24" id="main-courses">
+              <SectionHeader
+                badge="Foundation"
+                title="Programming Languages"
+                description="Start here if you're new to programming. Build a strong foundation."
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredMain.map((course, index) => (
+                  <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 50}ms` }}>
+                    <CourseCard {...course} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* CS Core Courses */}
-          <section className="mb-16 scroll-mt-24" id="cs-core">
-            <SectionHeader
-              badge="Core CS"
-              title="Computer Science Fundamentals"
-              description="Master the core subjects every CS student needs to know."
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {csCoreCourses.map((course, index) => (
-                <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 50}ms` }}>
-                  <CourseCard {...course} />
-                </div>
-              ))}
-            </div>
-          </section>
+          {filteredCS.length > 0 && (
+            <section className="mb-16 scroll-mt-24" id="cs-core">
+              <SectionHeader
+                badge="Core CS"
+                title="Computer Science Fundamentals"
+                description="Master the core subjects every CS student needs to know."
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredCS.map((course, index) => (
+                  <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 50}ms` }}>
+                    <CourseCard {...course} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* DSA Courses */}
-          <section className="mb-16 scroll-mt-24" id="dsa">
-            <SectionHeader
-              badge="Interview Prep"
-              title="DSA Section"
-              description="Master Data Structures & Algorithms to crack tech interviews."
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
-              {dsaCourses.map((course, index) => (
-                <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 100}ms` }}>
-                  <CourseCard {...course} />
-                </div>
-              ))}
-            </div>
-          </section>
+          {filteredDSA.length > 0 && (
+            <section className="mb-16 scroll-mt-24" id="dsa">
+              <SectionHeader
+                badge="Interview Prep"
+                title="DSA Section"
+                description="Master Data Structures & Algorithms to crack tech interviews."
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+                {filteredDSA.map((course, index) => (
+                  <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 100}ms` }}>
+                    <CourseCard {...course} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Framework Courses */}
-          <section className="scroll-mt-24" id="frameworks">
-            <SectionHeader
-              badge="Advanced"
-              title="Frameworks"
-              description="Learn industry-standard frameworks used by top companies."
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {frameworkCourses.map((course, index) => (
-                <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 50}ms` }}>
-                  <CourseCard {...course} />
-                </div>
-              ))}
-            </div>
-          </section>
+          {filteredFrameworks.length > 0 && (
+            <section className="scroll-mt-24" id="frameworks">
+              <SectionHeader
+                badge="Advanced"
+                title="Frameworks"
+                description="Learn industry-standard frameworks used by top companies."
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredFrameworks.map((course, index) => (
+                  <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 50}ms` }}>
+                    <CourseCard {...course} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </main>
 

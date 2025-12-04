@@ -11,7 +11,7 @@ export function FloatingSocialButtons() {
     <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
       {/* WhatsApp */}
       <a
-        href="https://chat.whatsapp.com/your-community-link"
+        href="https://chat.whatsapp.com/JkpL3D6RqdD3oLUHtQDv9A?mode=hqrt3"
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 animate-bounce-slow"
@@ -22,7 +22,7 @@ export function FloatingSocialButtons() {
       
       {/* Instagram */}
       <a
-        href="https://instagram.com/aspireroutecareers"
+        href="https://www.instagram.com/aspireroutecareers?igsh=MWx0eW52cWJrbzFpZw%3D%3D"
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 animate-bounce-slow"

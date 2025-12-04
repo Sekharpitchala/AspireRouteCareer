@@ -10,7 +10,7 @@ interface CourseCardProps {
 
 export function CourseCard({ title, rating = 4.5, category, url }: CourseCardProps) {
   return (
-    <div className="group bg-card rounded-xl border border-border shadow-soft hover:shadow-hover transition-all duration-300 overflow-hidden">
+    <div className="group bg-card rounded-xl border border-border shadow-soft hover:shadow-glow hover:border-primary/50 transition-all duration-300 overflow-hidden">
       {/* Thumbnail */}
       <div className="relative h-40 gradient-hero overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
