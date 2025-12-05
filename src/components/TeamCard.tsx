@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, Linkedin, Code2 } from "lucide-react";
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -16,40 +16,62 @@ interface TeamCardProps {
 
 export function TeamCard({ name, role, email, image, instagram }: TeamCardProps) {
   return (
-    <div className="group bg-card rounded-2xl border border-border shadow-soft hover:shadow-glow hover:border-primary/50 transition-all duration-300 p-6 text-center">
-      {/* Avatar */}
-      <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary/20 group-hover:border-primary/50 transition-colors">
-        <img 
-          src={image} 
-          alt={name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-        />
-      </div>
+    <div className="group relative bg-gradient-to-b from-card to-card/80 rounded-3xl border border-border/50 shadow-xl hover:shadow-2xl hover:border-primary/30 transition-all duration-500 overflow-hidden">
+      {/* Decorative Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
-      {/* Info */}
-      <h3 className="text-lg font-bold text-foreground mb-1">{name}</h3>
-      <p className="text-primary font-medium text-sm mb-3">{role}</p>
+      {/* Top Accent Bar */}
+      <div className="h-2 bg-gradient-to-r from-primary via-accent to-primary" />
       
-      {/* Contact */}
-      <div className="flex items-center justify-center gap-3">
-        <a 
-          href={`mailto:${email}`}
-          className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all"
-          aria-label={`Email ${name}`}
-        >
-          <Mail className="w-5 h-5" />
-        </a>
-        {instagram && (
+      <div className="relative p-8 text-center">
+        {/* Avatar with Ring */}
+        <div className="relative w-36 h-36 mx-auto mb-6">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent p-1 animate-pulse-slow">
+            <div className="w-full h-full rounded-full bg-card" />
+          </div>
+          <div className="absolute inset-1 rounded-full overflow-hidden border-4 border-card shadow-lg">
+            <img 
+              src={image} 
+              alt={name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          {/* Status Badge */}
+          <div className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+            <Code2 className="w-5 h-5 text-primary-foreground" />
+          </div>
+        </div>
+        
+        {/* Info */}
+        <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{name}</h3>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+          {role}
+        </div>
+        
+        {/* Email */}
+        <p className="text-sm text-muted-foreground mb-5 truncate px-2">{email}</p>
+        
+        {/* Contact Buttons */}
+        <div className="flex items-center justify-center gap-3">
           <a 
-            href={instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] flex items-center justify-center text-white hover:scale-110 transition-all"
-            aria-label={`${name}'s Instagram`}
+            href={`mailto:${email}`}
+            className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 shadow-md"
+            aria-label={`Email ${name}`}
           >
-            <InstagramIcon />
+            <Mail className="w-5 h-5" />
           </a>
-        )}
+          {instagram && (
+            <a 
+              href={instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-md"
+              aria-label={`${name}'s Instagram`}
+            >
+              <InstagramIcon />
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
