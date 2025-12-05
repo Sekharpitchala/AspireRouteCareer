@@ -158,21 +158,21 @@ export default function Index() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 animate-pulse-slow">
-              Our Team
+          <div className="text-center mb-16">
+            <span className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary text-sm font-semibold mb-4 animate-pulse-slow border border-primary/20">
+              ✨ Our Team
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-slide-up">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 animate-slide-up">
               Meet the Creators
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-in-delayed">
-              The passionate developers behind AspireRouteCareers, dedicated to helping students succeed.
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto animate-fade-in-delayed">
+              The passionate and proficient developers behind AspireRouteCareers, committed to empowering students with the best free learning resources.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
             {teamMembers.map((member, index) => (
               <div key={member.name} className="animate-fade-up" style={{ animationDelay: `${index * 150}ms` }}>
                 <TeamCard {...member} />
@@ -183,29 +183,33 @@ export default function Index() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 md:py-24 bg-secondary/30">
-        <div className="container mx-auto">
-          <div className="max-w-2xl mx-auto">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-secondary/20 to-background relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto relative z-10">
+          <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 animate-pulse-slow">
-                Get In Touch
+              <span className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary text-sm font-semibold mb-4 animate-pulse-slow border border-primary/20">
+                💬 Get In Touch
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-slide-up">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 animate-slide-up">
                 Contact Us
               </h2>
-              <p className="text-muted-foreground animate-fade-in-delayed">
-                Have questions or suggestions? We'd love to hear from you!
+              <p className="text-lg text-muted-foreground animate-fade-in-delayed">
+                Have questions, suggestions, or feedback? We'd love to hear from you!
               </p>
             </div>
 
-            <div className="bg-card rounded-2xl shadow-card p-6 md:p-8 border border-border animate-fade-up">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-primary" />
+            <div className="bg-card rounded-3xl shadow-2xl p-8 md:p-10 border border-border/50 animate-fade-up backdrop-blur-sm">
+              <div className="flex items-center gap-4 mb-8 pb-6 border-b border-border/50">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+                  <Mail className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Send us a message</h3>
-                  <p className="text-sm text-muted-foreground">We'll respond as soon as possible</p>
+                  <h3 className="text-xl font-bold text-foreground">Send us a message</h3>
+                  <p className="text-muted-foreground">aspireroutecareers@gmail.com</p>
                 </div>
               </div>
               <ContactForm />

@@ -44,6 +44,11 @@ const frameworkCourses = [
   { title: "Flask Python Framework", rating: 4.5, category: "Framework", url: "https://www.youtube.com/watch?v=Z1RJmh_OqeA" },
 ];
 
+const aptitudeCourses = [
+  { title: "Aptitude Complete Playlist", rating: 4.8, category: "Aptitude", url: "https://www.youtube.com/playlist?list=PL5x4-s2in7NXZqUALlpQP-8ZffGEUBx5W" },
+  { title: "IndiaBix - Practice Questions", rating: 4.9, category: "Aptitude", url: "https://www.indiabix.com/" },
+];
+
 export default function Playlists() {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -63,8 +68,12 @@ export default function Playlists() {
     c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     c.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  const filteredAptitude = aptitudeCourses.filter(c => 
+    c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  const hasResults = filteredMain.length > 0 || filteredCS.length > 0 || filteredDSA.length > 0 || filteredFrameworks.length > 0;
+  const hasResults = filteredMain.length > 0 || filteredCS.length > 0 || filteredDSA.length > 0 || filteredFrameworks.length > 0 || filteredAptitude.length > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -163,7 +172,7 @@ export default function Playlists() {
 
           {/* Framework Courses */}
           {filteredFrameworks.length > 0 && (
-            <section className="scroll-mt-24" id="frameworks">
+            <section className="mb-16 scroll-mt-24" id="frameworks">
               <SectionHeader
                 badge="Advanced"
                 title="Frameworks"
@@ -172,6 +181,24 @@ export default function Playlists() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredFrameworks.map((course, index) => (
                   <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 50}ms` }}>
+                    <CourseCard {...course} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Aptitude Courses */}
+          {filteredAptitude.length > 0 && (
+            <section className="scroll-mt-24" id="aptitude">
+              <SectionHeader
+                badge="Placement Prep"
+                title="Aptitude Section"
+                description="Master quantitative aptitude, logical reasoning, and verbal ability for placements."
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+                {filteredAptitude.map((course, index) => (
+                  <div key={course.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${index * 100}ms` }}>
                     <CourseCard {...course} />
                   </div>
                 ))}

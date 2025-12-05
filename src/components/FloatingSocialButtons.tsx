@@ -1,4 +1,5 @@
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Bot } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -9,12 +10,22 @@ const InstagramIcon = () => (
 export function FloatingSocialButtons() {
   return (
     <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+      {/* AI Coach */}
+      <Link
+        to="/ai-coach"
+        className="w-14 h-14 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 text-white flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 animate-bounce-slow"
+        aria-label="Open AI Coach"
+      >
+        <Bot className="w-7 h-7" />
+      </Link>
+      
       {/* WhatsApp */}
       <a
         href="https://chat.whatsapp.com/JkpL3D6RqdD3oLUHtQDv9A?mode=hqrt3"
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 animate-bounce-slow"
+        style={{ animationDelay: "100ms" }}
         aria-label="Join WhatsApp Community"
       >
         <MessageCircle className="w-7 h-7" />
@@ -26,7 +37,7 @@ export function FloatingSocialButtons() {
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 animate-bounce-slow"
-        style={{ animationDelay: "150ms" }}
+        style={{ animationDelay: "200ms" }}
         aria-label="Follow on Instagram"
       >
         <InstagramIcon />
