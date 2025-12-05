@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingSocialButtons } from "@/components/FloatingSocialButtons";
 import { CertificationCard } from "@/components/CertificationCard";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 const certifications = [
   { title: "Core Java Certification", provider: "SoloLearn", description: "Learn Java programming basics and earn a free certificate.", url: "https://www.sololearn.com/learn/java" },
@@ -29,6 +32,15 @@ const certifications = [
 ];
 
 export default function Certifications() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredCertifications = certifications.filter(
+    (cert) =>
+      cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cert.provider.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cert.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -37,7 +49,7 @@ export default function Certifications() {
       <main className="pt-24 pb-16">
         <div className="container mx-auto">
           {/* Hero */}
-          <div className="text-center mb-16 animate-fade-up">
+          <div className="text-center mb-12 animate-fade-up">
             <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4 animate-pulse-slow">
               Boost Your Resume
             </span>
@@ -50,9 +62,28 @@ export default function Certifications() {
             </p>
           </div>
 
+          {/* Search Bar */}
+          <div className="max-w-xl mx-auto mb-10">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search certifications by title, provider..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-12 py-6 text-lg rounded-xl border-2 border-border focus:border-primary transition-colors"
+              />
+            </div>
+            {searchQuery && (
+              <p className="text-sm text-muted-foreground mt-2 text-center">
+                Found {filteredCertifications.length} certification{filteredCertifications.length !== 1 ? 's' : ''}
+              </p>
+            )}
+          </div>
+
           {/* Certifications Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {certifications.map((cert, index) => (
+            {filteredCertifications.map((cert, index) => (
               <div key={cert.title} className="animate-fade-up hover-lift" style={{ animationDelay: `${(index % 8) * 50}ms` }}>
                 <CertificationCard
                   title={cert.title}
@@ -63,6 +94,12 @@ export default function Certifications() {
               </div>
             ))}
           </div>
+
+          {filteredCertifications.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">No certifications found matching "{searchQuery}"</p>
+            </div>
+          )}
         </div>
       </main>
 

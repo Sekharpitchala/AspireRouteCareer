@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -17,7 +18,9 @@ import {
   Play,
   FileText,
   Target,
-  Mail
+  Mail,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import heroBackground from "@/assets/hero-background.png";
 import teamAbhinay from "@/assets/team-abhinay.jpg";
@@ -64,6 +67,28 @@ const teamMembers = [
 ];
 
 export default function Index() {
+  const [currentFeature, setCurrentFeature] = useState(0);
+  const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-scroll features every 10 seconds
+  useEffect(() => {
+    autoScrollRef.current = setInterval(() => {
+      setCurrentFeature((prev) => (prev + 1) % features.length);
+    }, 10000);
+
+    return () => {
+      if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    };
+  }, []);
+
+  const goToFeature = (index: number) => {
+    setCurrentFeature(index);
+    if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    autoScrollRef.current = setInterval(() => {
+      setCurrentFeature((prev) => (prev + 1) % features.length);
+    }, 10000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -127,7 +152,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section with Auto-Scroll */}
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container mx-auto">
           <div className="text-center mb-12">
@@ -143,7 +168,58 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Mobile/Tablet Carousel View */}
+          <div className="lg:hidden relative">
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentFeature * 100}%)` }}
+              >
+                {features.map((feature, index) => (
+                  <div key={feature.title} className="w-full flex-shrink-0 px-4">
+                    <FeatureCard
+                      icon={feature.icon}
+                      title={feature.title}
+                      description={feature.description}
+                      delay={0}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Navigation Dots */}
+            <div className="flex justify-center gap-2 mt-6">
+              {features.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToFeature(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentFeature 
+                      ? 'bg-primary w-8' 
+                      : 'bg-primary/30 hover:bg-primary/50'
+                  }`}
+                />
+              ))}
+            </div>
+            
+            {/* Arrow Navigation */}
+            <button
+              onClick={() => goToFeature((currentFeature - 1 + features.length) % features.length)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 p-2 bg-card/80 rounded-full shadow-lg hover:bg-card"
+            >
+              <ChevronLeft className="w-6 h-6 text-foreground" />
+            </button>
+            <button
+              onClick={() => goToFeature((currentFeature + 1) % features.length)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 p-2 bg-card/80 rounded-full shadow-lg hover:bg-card"
+            >
+              <ChevronRight className="w-6 h-6 text-foreground" />
+            </button>
+          </div>
+
+          {/* Desktop Grid View */}
+          <div className="hidden lg:grid grid-cols-3 gap-6">
             {features.map((feature, index) => (
               <FeatureCard
                 key={feature.title}
