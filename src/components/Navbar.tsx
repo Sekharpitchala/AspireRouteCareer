@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
+import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -23,11 +24,10 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary-foreground/20 flex items-center justify-center shadow-soft group-hover:bg-primary-foreground/30 transition-colors duration-300">
-              <GraduationCap className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="text-lg font-bold text-primary-foreground hidden sm:block">
-              AspireRoute<span className="text-accent">Careers</span>
+            <img src={logo} alt="AS Logo" className="w-10 h-10 rounded-xl shadow-soft object-cover" />
+            <span className="text-lg font-bold hidden sm:block">
+              <span className="bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent">AspireRoute</span>
+              <span className="text-orange-500">Careers</span>
             </span>
           </Link>
 
